@@ -1,0 +1,17 @@
+body {
+    color: yellow;
+    padding: 1%;
+    height: 100px;
+    margin: auto;
+    left: 10%;
+    background: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbGMNfzE8T0iQiDfVT7y8fjrSDJUp3RLT7neG_xj3zEoDmac2_hQ);
+  }
+  button{
+    background-color: black;
+    color: yellow;
+    border: 2%;
+    border-color: red;
+    height: auto;
+    max-width: auto;
+    margin: auto;
+  }
