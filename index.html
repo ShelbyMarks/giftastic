@@ -33,7 +33,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script type="text/javascript">
             var animals = ["lion", "panda", "kangaroo", "llama"];
-            function renderButtons() {
+            function Buttons() {
                 $("#animals-view").empty();
                 for (var i = 0; i < animals.length; i++) {
                     var a = $("<button>");
@@ -47,9 +47,9 @@
                 event.preventDefault();
                 var animal = $("#animal-input").val().trim();
                 animals.push(animal);
-                renderButtons();
+                Buttons();
             });
-            renderButtons();
+            Buttons();
 
             ///////////////////////////////////////////////////
             $("button").on("click", function () {
@@ -84,3 +84,12 @@
 </body>
 
 </html>
+<!-- Comments:
+        Things I feel Like I accomplished:
+            *In a different file I got my GIPHY AJAX Call to return gifs coinciding to the button clicked, AKA Panda returned Panda GIFS
+            *IN this file, I got buttons to be rendered every time I click 'who in the Zoo'
+            *I got the Ajax calls to work, unfortunately, the search term I was hoping to use was't 
+        What I'm struggling with:
+        * I can't figure out why the Ajax call isn't incorporating my button click.
+        *I can't seem to make the button clicked send to the ajax query url. Instead in the console.log i'm getting back  [default][default]-->
+        
