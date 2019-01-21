@@ -16,12 +16,12 @@
         <div id="title">
             <h1>Welcome to the Zoo</h1>
         </div>
-        
+
         <form id="animal-form">
-                <label for="animal-input"></label>
-                <input type="text" id="animal-input"><br>
-                <input id="add-animal" type="submit" value="Who in the Zoo?!">
-            </form>
+            <label for="animal-input"></label>
+            <input type="text" id="animal-input"><br>
+            <input id="add-animal" type="submit" value="Who in the Zoo?!">
+        </form>
 
 
         <div id="animals-view"></div>
@@ -43,42 +43,42 @@
                     $("#animals-view").append(a);
                 }
             }
+            Buttons();
+            $(document).on("click","button", function () {
+                var animalz = $(this).attr("data-name");
+                console.log(this);
+                callgiphy(animalz);
+            });
+
+            function callgiphy(animalz) {
+                var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+                    animalz + "&api_key=dc6zaTOxFJmzC&limit=10";
+                console.log(queryURL);
+                $.ajax({
+                    url: queryURL,
+                    method: "GET"
+                }).then(function (response) {
+                    var results = response.data;
+                    for (var i = 0; i < results.length; i++) {
+                        if (results[i].rating !== "r") {
+                            var gifDiv = $("<div>");
+                            var rating = results[i].rating;
+                            var p = $("<p>").html("<h2>Rating: </h2>" + rating);
+                            var animalImage = $("<img>");
+                            animalImage.attr("src", results[i].images.fixed_height.url);
+                            gifDiv.append(p);
+                            gifDiv.append(animalImage);
+                            $("#gif-home").prepend(gifDiv);
+                        }
+                    }
+                });
+            }
             $("#add-animal").on("click", function (event) {
                 event.preventDefault();
                 var animal = $("#animal-input").val().trim();
                 animals.push(animal);
                 Buttons();
             });
-            Buttons();
-
-            ///////////////////////////////////////////////////
-            $("button").on("click", function () {
-                var animalz = $(this).attr("data-name", animals);
-                console.log(this);
-                console.log();
-                var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-                    animalz + "&api_key=dc6zaTOxFJmzC&limit=10";
-                    console.log(queryURL);
-                $.ajax({
-                    url: queryURL,
-                    method: "GET"
-                })
-                    .then(function (response) {
-                        var results = response.data;
-                        for (var i = 0; i < results.length; i++) {
-                            if (results[i].rating !== "r") {
-                                var gifDiv = $("<div>");
-                                var rating = results[i].rating;
-                                var p = $("<p>").html("<h2>Rating: </h2>" + rating);
-                                var animalImage = $("<img>");
-                                animalImage.attr("src", results[i].images.fixed_height.url);
-                                gifDiv.append(p);
-                                gifDiv.append(animalImage);
-                                $("#gif-home").prepend(gifDiv);
-                            }
-                        }
-                    });
-                });
         </script>
     </div>
 </body>
@@ -92,4 +92,3 @@
         What I'm struggling with:
         * I can't figure out why the Ajax call isn't incorporating my button click.
         *I can't seem to make the button clicked send to the ajax query url. Instead in the console.log i'm getting back  [default][default]-->
-        
